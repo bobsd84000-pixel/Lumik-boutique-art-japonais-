@@ -1,0 +1,19 @@
+name: Install Impeccable
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npx impeccable install
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: install impeccable"
+          branch: main
